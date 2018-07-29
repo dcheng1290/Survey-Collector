@@ -1,12 +1,16 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const authRoutes = require('../routes/authRoutes.js');
+const keys = require('../config/keys');
+require('../services/passport');
+require('../database/index');
+
 const app = express();
 
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send({ hi: 'there' });
-});
+authRoutes(app);
 
 const port = process.env.PORT || 8005;
 

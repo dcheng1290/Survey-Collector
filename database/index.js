@@ -1,14 +1,19 @@
 const mongoose = require('mongoose');
-
+const keys = require('../config/keys');
 const { Schema } = mongoose;
 
-const mongoUrl = 'mongodb://localhost:27017/payment';
+const mongoUri = keys.mongoUri;
 
 const db = mongoose.connect(
-  mongoUrl,
+  mongoUri,
   { useNewUrlParser: true },
-  err => {
-    if (err) console.log(err);
-    else console.log('DB has connected!');
-  }
+  () => console.log('Db has connected!')
 );
+
+const userSchema = new Schema({
+  googleId: String,
+});
+
+const User = mongoose.model('users', userSchema);
+
+module.exports = User;
