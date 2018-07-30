@@ -24,6 +24,7 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-strategy": "^1.0.0",
-    "prettier": "^1.13.7"
+    "prettier": "^1.13.7",
+    "stripe": "^6.5.0"
   }
 }
