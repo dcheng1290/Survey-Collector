@@ -9,13 +9,15 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.js",
-    "dev": "nodemon server/index.js"
+    "server": "nodemon server/index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "concurrently": "^3.6.1",
     "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.3",
     "mongoose": "^5.2.5",
