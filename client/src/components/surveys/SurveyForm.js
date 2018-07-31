@@ -14,12 +14,6 @@ const FIELDS = [
 ];
 
 class SurveyForm extends Component {
-  // onSubmit(values) {
-  //   this.props.createPost(values, () => {
-  //     this.props.history.push('/');
-  //   });
-  // }
-
   renderFields(field) {
     return _.map(FIELDS, ({ label, name }) => {
       return (
@@ -37,7 +31,7 @@ class SurveyForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+        <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
           {this.renderFields()}
           <button type="submit" className="btn-flat right teal white-text">
             NEXT
