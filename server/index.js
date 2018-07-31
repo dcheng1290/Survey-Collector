@@ -17,6 +17,8 @@ mongoose.connect(
 
 const app = express();
 
+app.use(bodyParser.json());
+
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -25,8 +27,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use(bodyParser.json());
 
 authRoutes(app);
 billRoutes(app);
