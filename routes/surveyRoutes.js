@@ -1,12 +1,16 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../server/middlewares/requirelogin');
 const requireCredits = require('../server/middlewares/requireCredits');
-const surveyTemplate = require('../services/emailTemplates');
+const surveyTemplate = require('../services/emailTemplates/surveyTemplates');
 const Mailer = require('../services/Mailer');
 const Survey = require('../database/models/Survey');
 
 module.exports = app => {
-  app.post('/api/surveys', requireLogin, requireCredits, (req, res) => {
+  app.get('/api/surveys/thanks', (req, res) => {
+    res.send('Thanks for voting!');
+  });
+
+  app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
     const { title, subject, body, recipients } = req.body;
 
     const survey = new Survey({
@@ -19,7 +23,16 @@ module.exports = app => {
     });
 
     // sending email here
-    const mailer = new Mailer(survey, surveyTemplate(survey));
-    mailer.send();
+    try {
+      const mailer = new Mailer(survey, surveyTemplate(survey));
+      await mailer.send();
+      await survey.save();
+      req.user.credits -= 1;
+      const user = await req.user.save();
+
+      res.send(user);
+    } catch (err) {
+      res.status(422).send(err);
+    }
   });
 };
