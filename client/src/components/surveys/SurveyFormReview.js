@@ -1,19 +1,34 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import _ from 'lodash';
+import React from 'react';
+import { connect } from 'react-redux';
+import formFields from './formFields';
 
-const SurveyReview = ({ onCancel }) => {
+const SurveyReview = ({ onCancel, formValues }) => {
+  const reviewFields = _.map(formFields, ({ name, label }) => {
+    return (
+      <div key={name}>
+        <label>{label}</label>
+        <div>{formValues[name]}</div>
+      </div>
+    );
+  });
+
   return (
     <div>
       <h5>Please confirm your entries</h5>
-      <Link
-        to="/surveys/new"
+      {reviewFields}
+      <button
         onClick={onCancel}
         className="btn-flat left yellow darken-3 white-text"
       >
         Back
-      </Link>
+      </button>
     </div>
   );
 };
 
-export default SurveyReview;
+function mapStateToProps(state) {
+  return { formValues: state.form.surveyForm.values };
+}
+
+export default connect(mapStateToProps)(SurveyReview);
