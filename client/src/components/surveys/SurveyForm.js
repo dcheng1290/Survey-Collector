@@ -1,9 +1,16 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import SurveyField from './SurveyField';
+
+const FIELDS = [
+  { label: 'Survey Title', name: 'title' },
+  { label: 'Subject Line', name: 'subject' },
+  { label: 'Email Body', name: 'body' },
+  { label: 'Recipients List', name: 'email' },
+];
 
 class SurveyForm extends Component {
   // onSubmit(values) {
@@ -13,40 +20,17 @@ class SurveyForm extends Component {
   // }
 
   renderFields(field) {
-    // const {
-    //   meta: { touched, error },
-    // } = field;
-    // const className = `form-group ${touched && error ? 'has-danger' : ''}`;
-
-    return (
-      // <div className={className}>
-      <div>
+    return _.map(FIELDS, ({ label, name }) => {
+      return (
         <Field
           type="text"
-          name="title"
-          label="Survey Title"
+          key={name}
+          label={label}
+          name={name}
           component={SurveyField}
         />
-        <Field
-          type="text"
-          name="subject"
-          label="Subject Line"
-          component={SurveyField}
-        />
-        <Field
-          type="text"
-          name="body"
-          label="Email Body"
-          component={SurveyField}
-        />
-        <Field
-          type="text"
-          name="email"
-          label="Recipients List"
-          component={SurveyField}
-        />
-      </div>
-    );
+      );
+    });
   }
 
   render() {
