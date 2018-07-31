@@ -3,24 +3,48 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-class SurveyForm extends Component {
-  onSubmit(values) {
-    this.props.createPost(values, () => {
-      this.props.history.push('/');
-    });
-  }
+import SurveyField from './SurveyField';
 
-  renderField(field) {
-    const {
-      meta: { touched, error },
-    } = field;
-    const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+class SurveyForm extends Component {
+  // onSubmit(values) {
+  //   this.props.createPost(values, () => {
+  //     this.props.history.push('/');
+  //   });
+  // }
+
+  renderFields(field) {
+    // const {
+    //   meta: { touched, error },
+    // } = field;
+    // const className = `form-group ${touched && error ? 'has-danger' : ''}`;
 
     return (
-      <div className={className}>
-        <label>{field.label}</label>
-        <input className="form-control" type="text" {...field.input} />
-        <div className="text-help">{touched ? error : ''}</div>
+      // <div className={className}>
+      <div>
+        <Field
+          type="text"
+          name="title"
+          label="Survey Title"
+          component={SurveyField}
+        />
+        <Field
+          type="text"
+          name="subject"
+          label="Subject Line"
+          component={SurveyField}
+        />
+        <Field
+          type="text"
+          name="body"
+          label="Email Body"
+          component={SurveyField}
+        />
+        <Field
+          type="text"
+          name="email"
+          label="Recipients List"
+          component={SurveyField}
+        />
       </div>
     );
   }
@@ -29,25 +53,10 @@ class SurveyForm extends Component {
     return (
       <div>
         <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
-          <Field
-            label="Title For Post"
-            type="text"
-            name="surveyTitle"
-            component="input"
-          />
-          <Field
-            label="Categories"
-            type="text"
-            name="categories"
-            component="input"
-          />
-          <Field label="Content" name="content" component="input" />
+          {this.renderFields()}
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
-          <Link to="/" className="btn btn-danger">
-            Cancel
-          </Link>
         </form>
       </div>
     );
