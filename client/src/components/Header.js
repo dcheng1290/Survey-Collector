@@ -34,7 +34,7 @@ class Header extends Component {
       <nav>
         <div className="nav-wrapper blue-grey lighten-1">
           <Link to={this.props.auth ? '/surveys' : '/'} className="brand-logo">
-            Email
+            SurveyNation
           </Link>
           <ul className="right hide-on-med-and-down">{this.renderContent()}</ul>
         </div>
