@@ -10,7 +10,7 @@ const Survey = require('../database/models/Survey');
 
 module.exports = app => {
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
-    res.send('Thanks for voting!');
+    res.send('Thanks for voting!!');
   });
 
   app.get('/api/surveys', requireLogin, async (req, res) => {
