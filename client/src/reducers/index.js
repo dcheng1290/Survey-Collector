@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import { reducer as reduxForm } from 'redux-form';
 import authReducer from './authReducer';
-import surveyReducer from './surveyReudcer';
+import surveyReducer from './surveyReducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   form: reduxForm,
-  survey: surveyReducer,
+  surveys: surveyReducer,
 });
 
 export default rootReducer;
