@@ -1,0 +1,14 @@
+.deleteIcon.right {
+  font-size: 19px;
+  margin: 0;
+  margin-left: 0px;
+}
+
+.delete {
+  color: black;
+}
+
+.sent, .last {
+  text-align: right;
+}
+

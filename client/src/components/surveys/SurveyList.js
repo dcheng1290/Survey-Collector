@@ -14,13 +14,24 @@ class SurveyList extends Component {
           <div className="card-content white-text">
             <span className="card-title">{survey.title}</span>
             <p>{survey.body}</p>
-            <p className="right">
+            <p className="sent">
               Sent On: {new Date(survey.dateSent).toLocaleDateString()}
             </p>
+            <p className="last">
+              Last Responded:{' '}
+              {new Date(survey.lastResponded).toLocaleDateString()}
+            </p>
           </div>
-          <div className="card-action">
+          <div className="card-action delete">
             <a>Yes: {survey.yes}</a>
             <a>No: {survey.no}</a>
+            <button
+              type="submit"
+              className="btn-flat-small right red darken-3 white-text"
+            >
+              DELETE
+              <i className="deleteIcon material-icons right">delete</i>
+            </button>
           </div>
         </div>
       );
