@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchSurveys } from '../../actions';
+import { fetchSurveys, deleteSurvey } from '../../actions';
 
 class SurveyList extends Component {
   componentDidMount() {
     this.props.fetchSurveys();
+  }
+
+  onDeleteClick(id) {
+    console.log(id);
+    this.props.deleteSurvey(id, this.props.fetchSurveys());
   }
 
   renderSurveys() {
@@ -19,7 +24,9 @@ class SurveyList extends Component {
             </p>
             <p className="last">
               Last Responded:{' '}
-              {new Date(survey.lastResponded).toLocaleDateString()}
+              {survey.lastResponded
+                ? new Date(survey.lastResponded).toLocaleDateString()
+                : 'N/A'}
             </p>
           </div>
           <div className="card-action delete">
@@ -28,6 +35,7 @@ class SurveyList extends Component {
             <button
               type="submit"
               className="btn-flat-small right red darken-3 white-text"
+              onClick={() => this.onDeleteClick(survey._id)}
             >
               DELETE
               <i className="deleteIcon material-icons right">delete</i>
@@ -49,5 +57,5 @@ function mapStateToProps({ surveys }) {
 
 export default connect(
   mapStateToProps,
-  { fetchSurveys }
+  { fetchSurveys, deleteSurvey }
 )(SurveyList);
