@@ -4,11 +4,10 @@
   margin-left: 0px;
 }
 
-.delete {
-  color: black;
-}
-
 .sent, .last {
   text-align: right;
 }
 
+.cardSection{
+  padding: 10px !important;
+}
